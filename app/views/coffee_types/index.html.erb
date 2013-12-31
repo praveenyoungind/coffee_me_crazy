@@ -1,0 +1,68 @@
+
+<div class="container">
+	<h1>................Coffee ME Crazy.............................</h1>
+	<div class="new_beans" style="background-color:pink;display:none;">
+		<%= form_tag("/coffee_types",:method=>:post,:remote=>true) do %>
+			<table>
+				    <tr>
+				    	<td>
+				  	     	<%= label_tag(:bean_name, "Name Of CoffeeBeans:") %>
+				  	    </td>
+				  	    <td> 
+		    			    <%= text_field_tag(:bean_name) %><br/>
+		    			</td>   
+	                </tr>
+	                <tr>
+	                	<td>
+						  <%= label_tag(:discription, "Description:") %>
+						</td>
+						<td>  
+						  <%= text_field_tag(:discription) %><br/>
+						</td>
+				    </tr>	  
+				    <tr>
+				    	<td>
+						  <%= label_tag(:location, "Location:") %>
+						</td>
+				    	<td>
+          			        <%= country_select(:coffee_type,:location,["India"],:prompt=>"Select location") %><br/>
+          			    </td>
+			        </tr>
+			        <br/>
+          			 <tr> <td><%= submit_tag("Create CoffeeBeans") %> </td></tr>
+			</table>
+		<% end %>
+	</div>
+    <br/><br/>
+	<%= button_to "New CoffeeBeans", "javascript:void(0);",:id=>"new_beans" %>
+	<div id="listing_beans">
+			<table class="index_listing">
+					<th>CoffeeBeans</th>
+					<th>Description</th>
+					<th>Place</th>
+					<th>Favorites</th>
+					<th></th>
+		            <th></th>
+					<% @coffee_types.each do |coffee| %>
+					<tr>
+						<td><%= link_to coffee.bean_name ,'/coffee_types/'+coffee.id.to_s %></td>
+					    <td><%=  coffee.discription %></td>
+						<td><%=  coffee.location %></td>
+						<td><%=  coffee.people_tried %></td>
+						<% if current_user.user_try.where(:coffee_type_id=>coffee.id).present? %>
+						      <td><p>tried</p></td> 
+						<% else%>
+							<td><%= button_to "Mark As Tried","/coffee_types/"+coffee.id.to_s+"/tried",:method=>:get,:remote=>true,:id=>coffee.id.to_s+"try" %></td>
+						<% end %>	
+						<td>
+						   <div>
+							<%= button_to("x remove",coffee,data:{confirm:"are u sure?"},:method=>:delete) %>
+							<%= hidden_field_tag(:coffee_type_id,coffee.id) %>
+						   </div>	
+						</td>
+					</tr>					
+					<% end %>
+
+			</table>
+    </div>			
+</div>	

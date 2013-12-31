@@ -1,0 +1,70 @@
+<%= form_tag('/coffee_types/'+@coffee_type.id.to_s+'/edit',:method=>:get,:id=>"up_cbn") do %>
+		<table>
+			    <tr>
+			    	<td>
+			  	     	<%= label_tag(:bean_name, "Name Of CoffeeBeans:") %>
+			  	    </td>
+			  	    <td> 
+	    			    <%= text_field_tag(:bean_name,@coffee_type.bean_name ) %><br/>
+	    			</td>   
+                </tr>
+                <tr>
+                	<td>
+					  <%= label_tag(:discription, "Description:") %>
+					</td>
+					<td>  
+					  <%= text_field_tag(:discription,@coffee_type.discription) %><br/>
+					</td>
+			    </tr>	  
+			    <tr>
+			    	<td>
+					  <%= label_tag(:location, "Location:") %>
+					</td>
+			    	<td>
+      			        <%= country_select(:coffee_type,:location,[@coffee_type.location]) %><br/>
+      			    </td>
+		        </tr>
+		        <br/>
+      			 <tr> <td><%= submit_tag("Update CoffeeBeans") %> </td></tr>
+		</table>	   
+<% end %>
+<div class="container">
+	<strong>Coffee Bean : <%= @coffee_type.bean_name %></strong>
+	<button id="edit_coffee" style="float:right;">edit</button>
+	<p>CoffeeBeand                Discription           location   people_tried</p>
+	<ul>
+		<li><p>CoffeeBean</p> <%= @coffee_type.bean_name %></li>
+		<li><p> Discription</p><%= @coffee_type.discription %></li>		
+		<li><p>Location</p><%= @coffee_type.location %></li>
+		<li><p>People Tried</p><%= @coffee_type.people_tried  %></li>		
+	</ul>
+    <strong>Comments:</strong>
+	<div class="comments" style="background-color:pink">
+		<% @coffee_type.comments.each do |comm| %>
+		  <p><strong>User:</strong><%= (comm.user.email.present?) ? (comm.user.email):('Unknown') %></p>
+		  <strong>Comment:</strong>
+		  <p><%= comm.comment %></p>
+		<%  end %>
+	</div>
+	<% unless @coffee_type.comments.present? %>
+	     <italic>No Comments Yet</italic>
+	<% end %>
+
+	<%= form_tag('/coffee_types/'+@coffee_type.id.to_s+'/comment',:method=>:get,:remote=>true) do %>
+	<table style="background-color:pink;">
+		<strong>Leave Your Comment Here</strong>
+		<th></th>
+		<th></th>
+		<tr>
+			<td><%= label_tag(:email,"Email:")%></td>   
+		    <td><%= email_field_tag(:email) %><br/></td>
+		</tr>
+		<tr>
+		   <td> <%= label_tag(:comment,"Type Your Comment")%></td>
+      	   <td> <%= text_field_tag(:comment) %></td>
+	    </tr>   
+	</table>       
+		       <%= submit_tag('submit') %>
+	<%  end %>
+	<%= link_to 'Coffee Tyepes',root_url %>
+</div>

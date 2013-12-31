@@ -1,0 +1,24 @@
+/*
+// Place all the styles related to the coffee_types controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+*/
+.container {
+  padding-top: 50px;
+  padding-left: 200px;
+  padding-right: 100px;	
+  padding-bottom: 20px;
+  background-color:#D8D5D2;
+}
+.new_beans{
+	background-color: #FFFFFF;
+}
+
+#up_cbn{
+	display:none;
+}
+
+#new_beans{
+	background-color: blue;
+	float :right;
+}
