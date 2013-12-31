@@ -4,9 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.0'
 
 # Use mysql as the database for Active Record
-group :development do
-	gem 'mysql2'
-end
+gem 'mysql2'
 
 group :production do
 	#gem 'pg'
