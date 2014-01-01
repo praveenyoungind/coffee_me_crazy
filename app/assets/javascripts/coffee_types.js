@@ -33,4 +33,17 @@ $(document).ready(function(){
     $('.comments').slimScroll({
          height: '500px'
     });
+
+    function AppViewModel() {
+                this.helpNotice=ko.observable("");
+                this.helpNote=ko.observable("");
+                this.firstInfo =function() {
+                        return(this.helpNotice("Click ON the New Bean button to create your favourite CoffeeSeed"));    
+                    };
+                this.secondInfo =function() {
+                        return(this.helpNote("Click ON the Edit button to Edit your favourite CoffeeSeed"));    
+                    };                    
+    }
+
+    ko.applyBindings(new AppViewModel());
 });

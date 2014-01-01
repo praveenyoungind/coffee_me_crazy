@@ -25,13 +25,14 @@
       			    </td>
 		        </tr>
 		        <br/>
-      			 <tr> <td><%= submit_tag("Update CoffeeBeans") %> </td></tr>
+      			<tr> <td><%= submit_tag("Update CoffeeBeans") %> </td></tr>
 		</table>	   
 <% end %>
 <div class="container">
+	<button data-bind="click: secondInfo">help?</button>
+	<p data-bind="text: helpNote"></p>
 	<strong>Coffee Bean : <%= @coffee_type.bean_name %></strong>
 	<button id="edit_coffee" style="float:right;">edit</button>
-	<p>CoffeeBeand                Discription           location   people_tried</p>
 	<ul>
 		<li><p>CoffeeBean</p> <%= @coffee_type.bean_name %></li>
 		<li><p> Discription</p><%= @coffee_type.discription %></li>		
